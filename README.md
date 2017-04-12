@@ -11,11 +11,11 @@ The unit of diversion is a cookie, although if the student enrolls in the free t
 
 ## 1.Experimental Design 
 ### 1.1 Metric choice
-+ **Invariant metrics**: Number of cookies, Number of clicks
++ **Invariant metrics**: Number of cookies, Number of clicks, Click-through probability
 + **Evaluation metrics**: Gross conversion, Retention, and Net conversion
 
 1. Number of cookies is the number of unique users to visit the course overview page. In this experiment, the Unit of Diversion is cookies, and it is evenly distributed among experimental and control group. Since the visits must happen before the users see the page indicated for the experiment, the number of cookies is independent from the experiment and thus can be chosen as one of the invariant metrics. 
-2. Number of user-id is the number of users enrolled in the free trial. This is not an ideal metric for both evaluation and invariant metrics. This is because the number of users enrolled in the free trial can be fluctuated every day and thus we would not be able to obtain a good repeatability for the experimental results using this variable. 
+2. Number of user-ids is the number of users enrolled in the free trial. This is not an ideal metric to be used for both evaluation metrics and invariant metrics. This is because the number of users enrolled in the free trial can be fluctuated every day and thus we would not be able to obtain a good repeatability for the experimental results using this variable. Moreover, since the main interest here is the proportion of unique cookies that click on the "start free" button (the probability of enrolling), using the number of user-ids would not give any valuable information. In addition to the above, number of user-ids is a raw count and not a ratio or proportion. Using a raw count metric could affect our evaluation a lot since the number of enrolled users can fluctuate a lot with respect to the number of "start free trial" clicks on a particular day. This turns out to affect our examination on the effect of "start free button" page rendering. A more appropriate choice for this metric would be the number of user-ids out of the number of "start-free-trial' clicks.
 3. Number of clicks is the number of cookies to click the start free trial botton. Since the action of clicking the free trial botton happens before the users see the experimental set-up, it should not be dependent on the experiment and thus is considered as one of the invariant metrics. One thing to be noted for this experiment is that the overview page is kept the same for both experimental and control groups until the users click the free trial botton.
 4. Click-through probability is another good invariant metric since the clicks can be happened before the users see the experiment. Click-through probability is the number of unique cookies to click the 'start free trial' botton out of the number of unique cookies to the view the course overview page. 
 5. Gross conversion is the number of users who complete the enrollment for the free trials over the number of users who clicked the "start free trial" button. This is a good evaluation metrics since it is directly related to the experimental set-up and it is dependent on the effect of the new feature added on the overview page. The underlying assumption here is that the gross conversion of the control group, which does not see the new feature added to the overview page, is higher than that of the experimental group, which will get to see a pop-up page asking them whether they will have enough time to devote for the course. 
@@ -38,7 +38,7 @@ The overall expectation can be summerized as follow:
 + Probability of payment, given enroll:	                0.53
 + Probability of payment, given click	                0.1093125
 
-For the Bernoulli distribution with probability p and population N, the analytical stardard deviation is computed as stde = sqrt(p*(1-p)/N). In order to further understand whether the analytical estimates of standard deviation match the empirical standard deviation, we have to consider whether or not the unit of analysis and unit of diversion match up. 
+For the Bonferroni distribution with probability p and population N, the analytical stardard deviation is computed as stde = sqrt(p*(1-p)/N). In order to further understand whether the analytical estimates of standard deviation match the empirical standard deviation, we have to consider whether or not the unit of analysis and unit of diversion match up. 
 
 #### Calculation for a given sample size:
 **Sample size** is 5000 cookies visiting the course overview page.
@@ -48,25 +48,25 @@ For the Bernoulli distribution with probability p and population N, the analytic
 + The number of users who see the start free trial page for this sample size is 5000 * 0.08 = 400 
 Therefore, the stde of gross conversion is: sqrt(0.20625*(1-0.20625)/400) = 0.0202
 
-The unit of analysis is the person who clicks the 'start free trial' button and the unit of diversion is a cookie that does so. They appear to be highly correlated though not the same since a person can use multiple devices to access the overview page to start the free trial. The high correlation signifies that the analytical estimate is accurate.  
+The unit of analysis is a person who clicks the 'start free trial' button and the unit of diversion is a cookie that does so. They appear to be highly correlated or the same, which signifies that the analytical estimate would be comparable to the empirical variability.   
 
 ##### Retention:
 + The baseline probability for retention is 0.53. 
 + The number of users who enrolled in the free trial for this sample size is 5000 * 0.08 * 0.20625 = 82.5
 Therefore, the stde of retention is: sqrt(0.53*(1-0.53)/82.5) = 0.0549. 
 
-The unit of analysis is a person who enrolled in the free trial and the unit of diversion is the user-id of that enrolled person. They are highly correlated as well, which indicates that the analytical estiamate is mostly accurate. It is very rare that these two variables won't match since it is less likely that a person would have several user-ids and vice versa. 
+The unit of analysis is the number of users who are enrolled in the free trial and the unit of diversion is the cookie of that enrolled person. Since the unit of analysis and the unit of diversion are not the same, the analytical estimate and the empirical estimate are expected to be different. 
 
 ##### Net conversion:
 + The baseline probability for net conversion is 0.1093125
 + The number of users who see the start free trial page for this sample size is 5000 * 0.08 = 400 
 Therefore, the stde of retention is: sqrt(0.1093125 * (1-0.1093125)/400) = 0.0156
 
-The unit of analysis and the unit of diversion are both the same for the net conversion, which is a user-id that is enrolled and clicked the 'start free trial' button. The analytical estimate is expected to be mostly accurate. 
+The unit of analysis and the unit of diversion are both the same for the net conversion, which is a user-id that is enrolled and clicked the 'start free trial' button. The analytical estimate is expected to be mostly accurate and thus comparable to the empirical variability. 
 
 ### 1.3 Sizing 
 #### **Number of Samples versus Power**
-I chose to not use the Bernoulli correction for my analysis since the metrics for this test have high correlation and the Bernoulli correction would be too consertive for it. 
+I chose to not use the Bonferroni correction for my analysis since the metrics for this test have high correlation and the Bonferroni correction would be too consertive for it. 
 
 The number of samples needed for each metrics was calculated using the ![online calculator](http://www.evanmiller.org/ab-testing/sample-size.html) with alpha = 0.05, 1 - beta = 0.8. The number produced by the online calculator is per branch. Hence, in order to obtain the number of required page views for both expermental and control groups, the results obtained from the online calculator will need to be doubled. 
 
@@ -82,12 +82,12 @@ Therefore, we would need 4741212 pageviews (the largest value of all three evalu
 
 With daily traffic of 40000 pageviews per day, I would direct 70% of my traffic (28000) to the experiment, which means it should take us approximately 685325/28000 ~ 25 days to accomplish the experiment. 
 
-The 70% of traffic being redirected means that 35% would go to the control group and 35% to the experimental group. This fration would not affect the whole operation of exisiting customers as well as the content of Udacity's webpage. 
+The 70% of traffic being redirected means that 35% would go to the control group and 35% to the experimental group. This fraction would not affect the whole operation of exisiting customers as well as the content of Udacity's webpage. Moreover, the experiment does not cause harm to anyone nor collect any sensitive information from the experimental subjects. Therefore, it should not be considered as risky. 
 
 ## 2.Experimental Analysis (![data](https://docs.google.com/spreadsheets/d/1Mu5u9GrybDdska-ljPXyBjTpdZIUev_6i7t4LRDfXM8/edit#gid=0))
 
 ### Sanity Checks
-Both the experimental and control groups are assigned to have a 0.5 Bernoulli distribution probability. Hence, their standard deviation is sqrt(0.5*0.5/N1 + N2) where N1, N2 are the population of the experimental and control groups. The margin of error for a 95% confidence interval is 1.96 * std. 
+Both the experimental and control groups are assigned to have a 0.5 Bonferroni distribution probability. Hence, their standard deviation is sqrt(0.5*0.5/N1 + N2) where N1, N2 are the population of the experimental and control groups. The margin of error for a 95% confidence interval is 1.96 * std. 
 
 #### Number of cookies:
 + Total pageviews for the control groups: 345543 
@@ -110,6 +110,16 @@ Since the observed value is within the calculated confidence interval, this inva
 + margin of error = 1.96*stde = 1.96 * 0.0021 = 0.0041
 + 95% confidence interval = [0.5-0.0041, 0.5+0.0041] = [0.4959, 0.5041]
 + observed = 28378/56730 = 0.5005
+
+Since the observed value is within the bounds, this invariant metric passed the sanity check.
+
+#### Click-through probability
++ Control value = 28378/345543 = 0.08213
++ Total pageviews for the experimental group: 344660
++ stde = sqrt(0.08213*(1-0.08213)/344660) = 0.00468
++ margin of error = 1.96*0.00468 = 0.00092
++ 95% confidence interval = [0.0812, 0.0830]
++ observed = 28325/344660 = 0.08218
 
 Since the observed value is within the bounds, this invariant metric passed the sanity check.
 
@@ -186,18 +196,19 @@ Since the two-tailed p-value is smaller than alpha = 0.05, the change is statist
 Since the two-tailed p-value is larger than alpha = 0.05, the change is not statistically significant. 
 
 ## Summary:
-
-Both the effective size test and the sign test indicate that the new added feature will practically significantly reduce the gross conversion though there is no effect the net conversion gained from it. 
+Bonferroni correction was not used in this design and analysis since the metrics in this test all have high correlation. Hence, it would be too conversative to use the Bonferroni correction for this particular case. It is importantto note that if a test is launched and the metrics shows a significant different, then a correction is necessary. However, a test would only be launched if all the evaluation metrics show significant change, which is not the case for this senario. Moreover, as we perform multiple comparisons, the more metrics are chosen, the more likely we will accumulate statistical errors. In order words, a correction would be applied if we use OR on all the metrics but not if we use AND for all the metrics. In addition, both the effective size test and the sign test indicate that the new added feature will practically significantly reduce the gross conversion though there is no effect the net conversion gained from it. 
 
 ## Recommendation:
 
-My recommendation is to not implement this new feature into the overview page of Udacity. This is because the result shows that the net rate conversion would not be increased practically significant by adding this new feature. In other words, adding the time commitment alert feature would not help to increase the number of paid users, which goes against the original goal of Udacity.
+My recommendation is to not implement this new feature into the overview page of Udacity. As a reminder, the original goal for adding this new feature is to decrease in gross conversion and increase in net conversion. The result shows that the gross conversion turned out to be negative and practically significant, which is a good result for this metric and for Udacity. This is because it would lower the cost as well as time for the Udacity team to take care of these users who would not have time to complete the courses and thus unlikely to convert. However, the result also shows that the net rate conversion would not be increased both practically significant and stastically significant by adding this new feature. The confidence interval of the net conversion does include negative numbers of the practical boundary, which implies it is possible that this evaluation metric got decreased by an amount that could potentially hurt the business. In other words, adding the time commitment alert feature would not help to increase the number of paid users, and hence the revenue of the company. 
 
 ## Follow-up Experiment:
-Another feature such as 'first-time user discount' can be added to attract attention from students who are already determined to take the course but are hestiated to pay. One thing to note here is that this new button 'first-time user discount' button is added in addition to the free trial button. 
+Another feature such as 'first-time user discount' can be added to attract attention from students who are already determined to take the course but are hestiated to pay. One thing to note here is that this new button 'first-time user discount' button is added in addition to the free trial button. In this follow-up experiment, the 'free-trial' button would not have a time commitment filter since that will add in more intervention than needed. While the free-trial button only asks students to be enrolled and not pay for anything before the 14-day-trial period, the first-time user discount program requires all users to be enrolled and have to pay for the program at the given discount price immediately. Because of its requirements, the 'first-time user discount' button can potentially increase the number of enrollments and revenue for Udacity. 
+
 There are two different hypothesises that can be made here:
-+ By providing a discount program for first-time users, it will help Udacity to attract more students to enroll into the courses.
++ By providing a discount program for first-time users, it will help Udacity to attract more students to enroll into the courses by reducing the overall price of the courses that they wanted to take but were hesitated to pay.
 + Even though these enrolled user-ids will be enrolled at a lower price than the others, the number of user-ids who are enrolled will increase over time, which will help to increase the revenue of Udacity overall. 
+
 
 There are two evaluation metrics that can be used for each of these hypothesis:
 + Conversion rate, which is the number of homepage viewers who became enrolled users after clicking the discount program button out of the total number of enrolled users. 
