@@ -65,7 +65,7 @@ Therefore, the stde of retention is: sqrt(0.1093125 * (1-0.1093125)/400) = 0.015
 The unit of analysis and the unit of diversion are both the same for the net conversion, which is a user-id that is enrolled and clicked the 'start free trial' button. The analytical estimate is expected to be mostly accurate. 
 
 ### 1.3 Sizing 
-####**Number of Samples versus Power**
+#### **Number of Samples versus Power**
 I chose to not use the Bernoulli correction for my analysis since the metrics for this test have high correlation and the Bernoulli correction would be too consertive for it. 
 
 The number of samples needed for each metrics was calculated using the ![online calculator](http://www.evanmiller.org/ab-testing/sample-size.html) with alpha = 0.05, 1 - beta = 0.8. The number produced by the online calculator is per branch. Hence, in order to obtain the number of required page views for both expermental and control groups, the results obtained from the online calculator will need to be doubled. 
@@ -78,7 +78,7 @@ The number of samples needed for each metrics was calculated using the ![online 
 
 Therefore, we would need 4741212 pageviews (the largest value of all three evaluation metrics) for this sample size. HOwever, this is a very large numver of required pageviews since in order to obtain 4741212 pageviews, it takes 4741212/40000 = 118 days, which is too long. Therefore, a better choice would be to drop the retention rate for the final evaluation metrics list. The final number of pageviews needed would be 685325. 
 
-####**Duration versus Exposure**
+#### **Duration versus Exposure**
 
 With daily traffic of 40000 pageviews per day, I would direct 70% of my traffic (28000) to the experiment, which means it should take us approximately 685325/28000 ~ 25 days to accomplish the experiment. 
 
