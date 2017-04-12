@@ -190,3 +190,18 @@ Since the two-tailed p-value is larger than alpha = 0.05, the change is not stat
 Both the effective size test and the sign test indicate that the new added feature will practically significantly reduce the gross conversion though there is no effect the net conversion gained from it. 
 
 ## Recommendation:
+
+My recommendation is to not implement this new feature into the overview page of Udacity. This is because the result shows that the net rate conversion would not be increased practically significant by adding this new feature. In other words, adding the time commitment alert feature would not help to increase the number of paid users, which goes against the original goal of Udacity.
+
+## Follow-up Experiment:
+Another feature such as 'first-time user discount' can be added to attract attention from students who are already determined to take the course but are hestiated to pay. One thing to note here is that this new button 'first-time user discount' button is added in addition to the free trial button. 
+There are two different hypothesises that can be made here:
++ By providing a discount program for first-time users, it will help Udacity to attract more students to enroll into the courses.
++ Even though these enrolled user-ids will be enrolled at a lower price than the others, the number of user-ids who are enrolled will increase over time, which will help to increase the revenue of Udacity overall. 
+
+There are two evaluation metrics that can be used for each of these hypothesis:
++ Conversion rate, which is the number of homepage viewers who became enrolled users after clicking the discount program button out over the total number of enrolled users. 
++ Revenue gain, which is the ratio of revenue over the number of homepage viewers who became enroller users after clicking the discount program. 
+
+This first evaluation metric will allow us to evaluate whether or not the additional option hlpes boosting the number of enrollments. The second evaluation metric will test whether adding this new option helps to increase the revenue of Udacity. 
+The invariant metric is the number of cookies since the unit of diversion is still the a cookie. This choice is due to the fact that the homepage viewers might not sign in. However, they are signed in then the user-id will be used instead. 
