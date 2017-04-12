@@ -200,7 +200,7 @@ There are two different hypothesises that can be made here:
 + Even though these enrolled user-ids will be enrolled at a lower price than the others, the number of user-ids who are enrolled will increase over time, which will help to increase the revenue of Udacity overall. 
 
 There are two evaluation metrics that can be used for each of these hypothesis:
-+ Conversion rate, which is the number of homepage viewers who became enrolled users after clicking the discount program button out over the total number of enrolled users. 
++ Conversion rate, which is the number of homepage viewers who became enrolled users after clicking the discount program button out of the total number of enrolled users. 
 + Revenue gain, which is the ratio of revenue over the number of homepage viewers who became enroller users after clicking the discount program. 
 
 This first evaluation metric will allow us to evaluate whether or not the additional option hlpes boosting the number of enrollments. The second evaluation metric will test whether adding this new option helps to increase the revenue of Udacity. 
